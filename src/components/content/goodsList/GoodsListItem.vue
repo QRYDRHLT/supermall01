@@ -1,0 +1,78 @@
+<template>
+	<div class="goods-list-item" @click="itemLink">
+		<img v-lazy="showImg" class="goods-list-img" @load="itemImgLoad">
+		<div class="goods-list-text">
+			<div class="goods-list-name one-txt-cut">{{goodsItem.title}}</div>
+			<div class="goods-list-price">
+				<div class="text-pink">{{goodsItem.price}}</div>
+				<div><i class="collect-icon"></i><span>{{goodsItem.cfav}}</span></div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+// import {debounce} from '../../../common/utils'
+	export default {
+		name: 'GoodsListItem',
+		props: {
+			goodsItem: {
+				type: Object,
+				default() {
+					return {}
+				}
+			}
+		},
+		methods: {
+			itemImgLoad(){
+				// 通过事件总线与home建立联系
+					this.$bus.$emit('itemImgLoad')
+					// console.log('图片加载完成');
+			},
+			// itemImgLoad() {
+			// 	// if(this.$route.path.indexOf('/home') >=0){
+			// 	// 	this.$bus.$emit('homeItemImgLoad');
+			// 	// }else if(this.$route.path.indexOf('/detail') >=0){
+			// 	// 	this.$bus.$emit('detailItemImgLoad');
+			// 	// }
+			// 	this.$bus.$emit('itemImgLoad');
+			// 	// console.log('this.$route.path.indexOf');
+			// },
+			itemLink() {
+				this.$router.push('/detail/' + this.goodsItem.iid)
+			}
+		},
+		computed: {
+			showImg(){
+				return this.goodsItem.image || this.goodsItem.show.img;
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.goods-list-item {
+		width: 48%;
+		height: auto;
+		padding-top: 6px;
+		font-size: 14px;
+	}
+	.goods-list-item .goods-list-img{
+		width: 100%;
+		height: auto;
+		border-radius: 4px;
+	}
+	.goods-list-price {
+		display: flex;
+		justify-content: space-between;
+		margin: 6px 0;
+	}
+	.goods-list-price	.collect-icon {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background: url(~assets/images/home/collect_icon.png) no-repeat;
+		background-size: cover;
+		vertical-align: bottom;
+	}
+</style>
