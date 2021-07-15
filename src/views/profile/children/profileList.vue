@@ -13,7 +13,7 @@
       <span style="border-bottom: 0;">会员卡</span>
     </div>
     <div class="line"></div>
-    <div class="profile-list-item">
+    <div class="profile-list-item" @click="cartClick">
       <img src="../../../assets/images/profile/4_gouwuche.png" class="profile-list-icon"/>
       <span>我的购物车</span>
     </div>
@@ -26,7 +26,12 @@
 
 <script>
 export default {
-  name: "profileList"
+  name: "profileList",
+  methods: {
+    cartClick(){
+      this.$router.replace('/cart')
+    }
+  }
 };
 </script>
 

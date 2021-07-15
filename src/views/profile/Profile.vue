@@ -4,7 +4,7 @@
       <div slot="center">个人中心</div>
     </nav-bar>
     <scroll class="scroll-height">
-      <login />
+      <login-bar />
       <money />
       <div class="line"></div>
       <profile-list />
@@ -14,14 +14,14 @@
 
 <script>
 import NavBar from "components/common/navBar/NavBar";
-import Login from "./children/Login";
+import LoginBar from "./children/LoginBar";
 import Money from "./children/Money";
 import ProfileList from "./children/profileList";
 import Scroll from "components/common/scroll/Scroll";
 
 export default {
   name: "Profile",
-  components: { Scroll, ProfileList, Money, Login, NavBar }
+  components: { Scroll, ProfileList, Money, LoginBar, NavBar}
 };
 </script>
 

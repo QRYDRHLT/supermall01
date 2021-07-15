@@ -18,7 +18,7 @@ export default {
   },
   data(){
     return {
-     
+    //  isItemClick: 
     }
   },
   computed: {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     itemClick(){
-      this.$router.replace(this.path)
+        this.$router.replace(this.path)
     }
   }
 }

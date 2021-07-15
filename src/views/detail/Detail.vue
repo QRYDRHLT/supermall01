@@ -66,7 +66,7 @@ export default {
       themeTopYs: [],
       getThemeTopYs: null,
       currentIndex: 0,
-      // product: null
+      goodsRefresh: null,
       message: '默认文字',
       isToastShow: false
     }
@@ -76,7 +76,7 @@ export default {
   created(){
     this.iid = this.$route.params.iid
     getDetail(this.iid).then((res)=>{
-      console.log(res);
+      // console.log(res);
       const result = res.data.result
       // 获取轮播图
       this.banners = result.itemInfo.topImages
@@ -110,6 +110,9 @@ export default {
       this.themeTopYs.push(this.$refs.commentInfo.$el.offsetTop)
       this.themeTopYs.push(this.$refs.recommendInfo.$el.offsetTop)
     },100)
+    this.goodsRefresh = debounce(()=>{
+      this.$refs.scroll.refresh()
+    },100)
   },
   destoryed(){
     // 离开时 取消监听
@@ -117,7 +120,7 @@ export default {
   },
   methods: {
     goodsImgLoad(){
-      this.$refs.scroll.refresh()
+      this.goodsRefresh()
       this.getThemeTopYs()
     },
     titleClick(index){     

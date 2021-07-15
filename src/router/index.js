@@ -8,6 +8,7 @@ const Category = () => import ('views/category/Category.vue')
 const Cart= () => import ('views/cart/Cart.vue')
 const Profile = () => import ('views/profile/Profile.vue')
 const Detail = () => import ('views/detail/Detail.vue')
+const Login = () => import ('views/login/Login.vue')
 
 const routes = [
   {
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/detail/:iid',
     component: Detail
+  },
+  {
+    path: '/login',
+    component: Login
   }
 ]
 

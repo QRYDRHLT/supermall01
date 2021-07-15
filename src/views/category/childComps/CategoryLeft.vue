@@ -28,13 +28,14 @@ export default {
   methods: {
     itemClick(index) {
       this.currIndex = index;
+      this.$emit('itemClick',index)
     }
   }
 };
 </script>
 <style scoped>
-#category_left {
-  width: 25%;
+#category_left { 
+  width: 100%;
   background-color: #f6f6f6;
 }
 .left_tab_item {

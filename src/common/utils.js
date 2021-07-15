@@ -1,5 +1,5 @@
 // 防抖函数,解决重复频繁调用问题
-export function debounce(fn, delay) {
+export function debounce(fn, delay=100) {
   let timer = null;
   return function (...args) {
     if (timer) {

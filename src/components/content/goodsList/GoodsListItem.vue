@@ -1,6 +1,8 @@
 <template>
 	<div class="goods-list-item" @click="itemLink">
+		<!-- 懒加载 -->
 		<img v-lazy="showImg" class="goods-list-img" @load="itemImgLoad">
+		<!-- <img :src="showImg" class="goods-list-img" @load="itemImgLoad"> -->
 		<div class="goods-list-text">
 			<div class="goods-list-name one-txt-cut">{{goodsItem.title}}</div>
 			<div class="goods-list-price">

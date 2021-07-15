@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import VueLazyload from 'vue-lazyload'
 import FastClick from 'fastclick'
+
 Vue.config.productionTip = false
 
 // 图片懒加载

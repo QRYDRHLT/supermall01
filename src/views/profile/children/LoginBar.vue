@@ -1,10 +1,10 @@
 <template>
-  <div class="login">
+  <div class="login-bar">
     <div class="user-pic">
       <!-- <img :src="defaultPic" class="user-pic-img" fit="cover" round /> -->
-      <img src="../../../assets/images/profile/user.png" class="user-pic-img" fit="cover" round />
+      <img :src="defaultPic" class="user-pic-img" fit="cover" round />
     </div>
-    <div class="user-info">
+    <div class="user-info" @click="loginClick">
       <p>登录/注册</p>
       <div class="phone-num">
         <img alt="" class="icon-phone" src="../../../assets/images/profile/phone.png" />
@@ -19,17 +19,22 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "LoginBar",
   data() {
     return {
-      defaultPic: " "
+      defaultPic: require('../../../assets/images/profile/user.png')
     };
+  },
+  methods: {
+    loginClick(){
+      this.$router.replace('/login')
+    }
   }
 };
 </script>
 
 <style scoped>
-.login {
+.login-bar {
   position: relative;
   display: flex;
   align-items: center;

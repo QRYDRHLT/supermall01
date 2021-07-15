@@ -12,7 +12,7 @@
         @pullingUp="loadMore"
         @scroll="contentScroll" 
         ref="scroll">
-      <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"/>
+      <home-swiper :banners="banners"  ref="hSwiper"/>
       <recommend-view :recommends="recommends"/>
       <home-feature/>
       <tab-control 
@@ -76,8 +76,12 @@ export default {
   mixins: [itemImgListerMixin,backTopMixin],
 
   activated(){
+    // 活跃的时候  设置纵向滚动的y值
     this.$refs.scroll.scrollTo(0,this.saveY,0)
 		this.$refs.scroll.refresh();
+    
+    // console.log('actived');
+
   },
   deactivated(){
     // 保存不活跃时的纵向滚动的y值 
@@ -85,6 +89,9 @@ export default {
     // 不活跃时取消全局监听
     this.$bus.$off('itemImgLoad',this.itemImgLister)
   },
+  // updated(){
+  //   this.tabControlY = this.$refs.tabControl2.$el.offsetTop 
+  // },
   methods: {
     // 事件监听相关
     tabItemClick(index){
@@ -99,6 +106,7 @@ export default {
           this.currentType = 'sell'
           break
       }
+      console.log(this.$refs.scroll.scrollerHeight);
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
     },
@@ -110,25 +118,32 @@ export default {
         this.recommends = res.data.data.recommend.list
       })
     },
+    //请求商品数据
     getHomeGoods(type){
       const page = this.goods[type].page+1 //请求0+1即第一页
       getHomeGoods(type,page).then(res => {
         // console.log(res);
         this.goods[type].list.push(...res.data.data.list);//将数值保存在list中
         this.goods[type].page += 1;//page加1
+        this.$nextTick(()=>{
+          this.tabControlY = this.$refs.tabControl2.$el.offsetTop 
+        })
         this.$refs.scroll.finishPullUp()
       })
     },
+    // 上拉加载更多
     loadMore(){
       this.getHomeGoods(this.currentType)
-      this.$refs.scroll.refresh()
     },
-    swiperImgLoad(){
-      // 轮播图图片加载完成 获取tabControl的offsetTop
-      this.tabControlY = this.$refs.tabControl2.$el.offsetTop 
-    },
+    // swiperImgLoad(){
+    //   // 轮播图图片加载完成 获取tabControl的offsetTop
+    //   this.tabControlY = this.$refs.tabControl2.$el.offsetTop 
+    // },
+    // 内容滚动
     contentScroll(position){
+      // 判断隐藏的tabcontrol是否显示
       this.isTabShow = (-position.y) > this.tabControlY
+      // 混入  回到顶部是否显示
       this.listenBackTop(position)
     }
 
