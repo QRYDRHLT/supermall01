@@ -5,7 +5,7 @@
 			&ensp;<label for="check" > 全选</label>
 		 </div>
 		<div>合计：{{totalPrice}}</div>
-		<div>去结算{{checkLength}}</div>
+		<div @click="calc">去结算{{checkLength}}</div>
 	</div>
 </template>
 
@@ -41,6 +41,9 @@
 				}else{//如果全部选中，则取消全选
 					this.cartList.forEach(item => item.checked = false)
 				}
+			},
+			calc(){
+				console.log('您点击了结算')
 			}
 		}
 	}

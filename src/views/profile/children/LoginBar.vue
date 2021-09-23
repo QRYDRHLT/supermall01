@@ -5,10 +5,14 @@
       <img :src="defaultPic" class="user-pic-img" fit="cover" round />
     </div>
     <div class="user-info" @click="loginClick">
-      <p>登录/注册</p>
+      <!-- 登录时  显示用户名-->
+      <p v-if="this.$store.state.user">{{this.$store.state.user}}</p>
+      <!-- 未登录时 -->
+      <p v-else >登录/注册</p>
       <div class="phone-num">
         <img alt="" class="icon-phone" src="../../../assets/images/profile/phone.png" />
-        <p>暂未绑定手机号</p>
+        <p v-if="this.$store.state.number">{{this.$store.state.number}}</p>
+        <p v-else>暂未绑定手机号</p>
       </div>
     </div>
     <div class="profile-arrow-right">
@@ -27,7 +31,9 @@ export default {
   },
   methods: {
     loginClick(){
-      this.$router.replace('/login')
+      if(!this.$store.state.number){
+        this.$router.replace('/login')
+      } 
     }
   }
 };

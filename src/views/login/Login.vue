@@ -31,6 +31,12 @@ export default {
 </script>
 
 <style scoped>
+.login {
+  position: relative;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 11;
+}
 .back-icon {
   width: 22px;
   height: 22px;

@@ -3,12 +3,17 @@
 		<nav-bar class="cart-nav">
 			<div slot="center">购物车({{cartList.length}})</div>
 		</nav-bar>
-		<scroll :probeType="3" 
-				class="cart-content" 
-				ref="scroll">
-			<cart-list></cart-list>
-		</scroll>
-		<cart-bot-bar></cart-bot-bar>
+		<div v-if="cartList.length">
+			<scroll :probeType="3" 
+					class="cart-content" 
+					ref="scroll">
+				<cart-list></cart-list>
+			</scroll>
+			<cart-bot-bar></cart-bot-bar>
+		</div>
+		<div v-else class="nullDiv">
+			<img src="~@/assets/images/null.png">
+		</div>
 	</div>
 </template>
 
@@ -55,5 +60,12 @@
 		
 		font-size: 16px;
 		font-weight: 500;
+	}
+	.nullDiv {
+		height: calc(100vh - 93px);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		/* background-color: #f6f6f6; */
 	}
 </style>

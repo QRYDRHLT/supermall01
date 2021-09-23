@@ -7,7 +7,12 @@ import getters from './getters'
 Vue.use(Vuex);
 
 const state = {
-  cartList:[]
+  // 初始化
+  user: window.sessionStorage.getItem('user'),
+  number: window.sessionStorage.getItem('number'),
+  password: window.sessionStorage.getItem('password'),
+  // 购物车清单
+  cartList:[],
 }
 const store = new Vuex.Store({
   state,

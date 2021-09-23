@@ -1,6 +1,7 @@
 import {
   ADD_CART_COUNT,
-  ADD_CART_PUSH
+  ADD_CART_PUSH,
+  GET_USER
 } from './mutations-types'
 export default {
   addCart(context, payload){
@@ -12,5 +13,8 @@ export default {
     }else {
       context.commit(ADD_CART_PUSH,payload)
     }
+  },
+  getUser(context, payload){
+    context.commit(GET_USER,payload)
   }
 }

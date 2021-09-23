@@ -2,21 +2,49 @@
   <div class="acount-content">
     <div class="acount-wrap">
       <div class="input-wrap">
-       <input type="text" placeholder="用户名/手机号">
+       <input type="text" v-model="user" placeholder="昵称">
       </div>
       <div class="input-wrap">
-       <input type="password" placeholder="密码">
+       <input type="number" v-model="number" placeholder="手机号">
+      </div>
+      <div class="input-wrap">
+       <input type="password" v-model="password" placeholder="密码">
       </div>
       <div class="submit-wrap">
-        <span>登录</span>
+        <span v-if="true" @click="submitLogin" >登录</span>
+        <span v-else>注册</span>
       </div>
+    <toast :message="message" v-show="isToast"></toast>
+      <!-- <p>暂无账号，立即注册</p> -->
     </div>
   </div>
 </template>
 
 <script>
+import Toast from '../toast/Toast'
 export default {
-  name: 'AcountContent'
+  name: 'AcountContent',
+  components: {
+    Toast
+  },
+  data(){
+    return{
+      user: '',
+      number: '',
+      password: '',
+      message: '登录成功',
+      isToast: false
+    }
+  },
+  methods: {
+    submitLogin(){
+      this.isToast = true
+      console.log(this.user,this.number,this.password);
+      // 触发action中getUser的回调函数，同时传入用户名和密码
+      this.$store.dispatch('getUser',{user:this.user,number:this.number,password:this.password})
+      this.$router.replace('/profile')
+    }
+  }
 }
 </script>
 
